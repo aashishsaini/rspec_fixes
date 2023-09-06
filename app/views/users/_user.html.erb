@@ -16,7 +16,7 @@
 
   <p id='favorite_teachers'>
     <strong>Favorite Teachers:</strong>
-    <%= user.teachers.favorites.map(&:id).map {|user_id| User.find(user_id).name }.join(', ') %>
+    <%= user.teachers.favorites.ids.map {|user_id| User.find(user_id).name }.join(', ') %>
   </p>
 
   <p id='classmates'>

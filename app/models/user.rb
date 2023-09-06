@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :enrollments
+  has_many :teacher_enrollments, foreign_key: :teacher_id, class_name: "Enrollment"
 
   enum kind: {
     student_kind: 0,
@@ -15,10 +16,12 @@ class User < ApplicationRecord
                        .where.not(enrollments: { user_id: user.id })
   }
 
+  has_many :teachers, through: :enrollments, foreign_key: 'teacher_id', class_name: 'User'
   validate :validate_kind, on: :update
 
-  def teachers
-    enrollments
+
+  def self.favorites
+    where("enrollments.favorite IS TRUE")
   end
 
   def teacher?
