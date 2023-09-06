@@ -5,5 +5,4 @@ class Enrollment < ApplicationRecord
 
   scope :all_teacher_ids, -> { map(&:teacher_id).compact }
   scope :all_student_ids, -> { map(&:user_id).compact }
-
 end
